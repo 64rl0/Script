@@ -157,3 +157,24 @@ mkextract() {
     done
 }
 
+
+# Update all the dotfiles configs
+update-dotfiles() {
+
+    dotfiles=(
+        "${HOME}/.carlogtt_alias"
+        "${HOME}/.carlogtt_script"
+        "${HOME}/.vim"
+        "${HOME}/.fzf/config"
+        "${HOME}/.config/starship"
+        "${HOME}/.config/tmux"
+        "${HOME}/.config/alacritty"
+     )
+
+    for dotfile in "${dotfiles[@]}"; do
+        echo "${dotfile}"
+        cd "${dotfile}" && git fetch && git status -s && git pull
+        echo
+        cd - >/dev/null 1>&2
+    done
+}
