@@ -173,8 +173,8 @@ update-dotfiles() {
 
     for dotfile in "${dotfiles[@]}"; do
         echo "${dotfile}"
-        cd "${dotfile}" && git fetch && git status -s && git pull
+        cd -q "${dotfile}" && git fetch && git status && git pull
         echo
-        cd - >/dev/null 1>&2
+        cd -q "${OLDPWD}"
     done
 }
