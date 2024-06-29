@@ -7,66 +7,6 @@
 # scripts.sh
 # Created 6/28/24 - 10:05 PM UK Time (London) by carlogtt
 
-# Basic Foreground Colors
-black=$'\033[30m'
-red=$'\033[31m'
-green=$'\033[32m'
-yellow=$'\033[33m'
-blue=$'\033[34m'
-magenta=$'\033[35m'
-cyan=$'\033[36m'
-white=$'\033[37m'
-
-# Bold/Bright Foreground Colors
-bold_black=$'\033[1;30m'
-bold_red=$'\033[1;31m'
-bold_green=$'\033[1;32m'
-bold_yellow=$'\033[1;33m'
-bold_blue=$'\033[1;34m'
-bold_magenta=$'\033[1;35m'
-bold_cyan=$'\033[1;36m'
-bold_white=$'\033[1;37m'
-
-# Basic Background Colors
-bg_black=$'\033[40m'
-bg_red=$'\033[41m'
-bg_green=$'\033[42m'
-bg_yellow=$'\033[43m'
-bg_blue=$'\033[44m'
-bg_magenta=$'\033[45m'
-bg_cyan=$'\033[46m'
-bg_white=$'\033[47m'
-
-# Text Formatting
-bold=$'\033[1m'
-dim=$'\033[2m'
-italic=$'\033[3m'
-underline=$'\033[4m'
-invert=$'\033[7m'
-hidden=$'\033[8m'
-
-# Reset Specific Formatting
-end=$'\033[0m'
-end_bold=$'\033[21m'
-end_dim=$'\033[22m'
-end_italic_underline=$'\033[23m'
-end_invert=$'\033[27m'
-end_hidden=$'\033[28m'
-
-# Emoji
-green_check_mark="\xE2\x9C\x85"
-hammer_and_wrench="\xF0\x9F\x9B\xA0"
-clock="\xE2\x8F\xB0"
-sparkles="\xE2\x9C\xA8"
-stop_sign="\xF0\x9F\x9B\x91"
-warning_sign="\xE2\x9A\xA0\xEF\xB8\x8F"
-key="\xF0\x9F\x94\x91"
-circle_arrows="\xF0\x9F\x94\x84"
-broom="\xF0\x9F\xA7\xB9"
-link="\xF0\x9F\x94\x97"
-package="\xF0\x9F\x93\xA6"
-network_world="\xF0\x9F\x8C\x90"
-
 
 # Recursively fild all process children
 pstree() {
@@ -225,24 +165,3 @@ mkextract() {
     done
 }
 
-
-# Update all the dotfiles configs
-dotfiles-update() {
-
-    dotfiles=(
-        "${HOME}/.carlogtt_alias"
-        "${HOME}/.carlogtt_script"
-        "${HOME}/.vim"
-        "${HOME}/.fzf/config"
-        "${HOME}/.config/starship"
-        "${HOME}/.config/tmux"
-        "${HOME}/.config/alacritty"
-     )
-
-    for dotfile in "${dotfiles[@]}"; do
-        echo "${sparkles}${bold_yellow}${dotfile}${end}"
-        cd -q "${dotfile}" && git fetch && git status && git pull
-        echo
-        cd -q "${OLDPWD}"
-    done
-}
