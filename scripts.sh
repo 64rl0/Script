@@ -156,9 +156,9 @@ mkextract() {
         if [ -f "${filepath}" ]; then
             mkdir -p -- "${dirpath}/${ext_dir_name}/extracted"
             mv -- "${filepath}" "${dirpath}/${ext_dir_name}"
-            cp -- "${dirpath}/${ext_dir_name}/${file}" "${dirpath}/${ext_dir_name}/extracted/${file}"
-            _extract "${dirpath}/${ext_dir_name}/extracted/${file}"
-            rm -rf -- "${dirpath}/${ext_dir_name}/extracted/${file}"
+            cp -- "${dirpath}/${ext_dir_name}/${file}" "${dirpath}/${ext_dir_name}/extract/${file}"
+            _extract "${dirpath}/${ext_dir_name}/extract/${file}"
+            rm -rf -- "${dirpath}/${ext_dir_name}/extract/${file}"
         else
             echo "'$1' is not a valid file"
         fi
