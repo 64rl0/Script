@@ -12,7 +12,7 @@
 
 # -------------------------------------
 # pstree
-# Recursively fild all process children
+# Recursively find all process children
 # -------------------------------------
 pstree() {
     _find_children() {
