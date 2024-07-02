@@ -1,14 +1,14 @@
-#!/bin/bash
+# scripts.sh
 
 #   __|    \    _ \  |      _ \   __| __ __| __ __|
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# scripts.sh
-# Created 6/28/24 - 10:05 PM UK Time (London) by carlogtt
 
-
+# -------------------------------------
+# pstree
 # Recursively fild all process children
+# -------------------------------------
 pstree() {
     find_children() {
         for child in $(sudo ps -e -o "pid,ppid" | awk -v ppid="${1}" '$2 == ppid {print $1}'); do
@@ -112,7 +112,10 @@ pstree() {
 }
 
 
+# --------------------------------------
+# mkextract
 # Extract files in their own directories
+# --------------------------------------
 mkextract() {
     _extract() {
         case $1 in
