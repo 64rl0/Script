@@ -15,7 +15,7 @@
 # Recursively fild all process children
 # -------------------------------------
 pstree() {
-    find_children() {
+    _find_children() {
         for child in $(sudo ps -e -o "pid,ppid" | awk -v ppid="${1}" '$2 == ppid {print $1}'); do
             echo -e '\033[47m'
             sudo ps -p "${child}" -o "pid,ppid,stat,uid,user,pri,ni,tty,%cpu,%mem,rss,vsz,start,time,command"
@@ -35,12 +35,12 @@ pstree() {
             sudo lsof -i -a -p "${child}"
             echo -e -n '\033[0m'
 
-            find_children "${child}"
+            _find_children "${child}"
         done
         echo -e ""
     }
 
-    find_parents() {
+    _find_parents() {
         local child_pid="${1}"
         local parent_pid=$(sudo ps -p "${child_pid}" -o ppid= | tr -d ' ')
         local parents=()
@@ -78,6 +78,7 @@ pstree() {
         echo -e ""
     }
 
+    # ENTRY POINT
     if [[ -z "${1}" ]]; then
         echo -e "Usage: pstree <PID>"
         return 1
@@ -89,7 +90,7 @@ pstree() {
     fi
 
     # Print parent processes
-    find_parents "${1}" | awk 'NF || !blank++'
+    _find_parents "${1}" | awk 'NF || !blank++'
 
     # Print target process
     echo -e '\033[43m'
@@ -113,7 +114,7 @@ pstree() {
     echo -e ""
 
     # Print child processes
-    find_children "${1}" | awk 'NF || !blank++'
+    _find_children "${1}" | awk 'NF || !blank++'
 }
 
 
@@ -149,6 +150,7 @@ mkextract() {
         esac
     }
 
+    # ENTRY POINT
     if [[ -z "${1}" ]]; then
         echo -e "Usage: mkextract <FILE(s)>"
         return 1
