@@ -10,7 +10,6 @@
 # Description: carlogtt personal scripts
 # --------------------------------------
 
-
 # -------------------------------------
 # pstree
 # Recursively find all process children
@@ -55,7 +54,7 @@ pstree() {
         parents+=("1")
 
         # Print all parent PIDs in reverse order
-        for ((idx=${#parents[@]}-1; idx>=0; idx--)); do
+        for ((idx = ${#parents[@]} - 1; idx >= 0; idx--)); do
             pid="${parents[@]:${idx}:1}"
 
             echo -e '\033[47m'
@@ -118,7 +117,6 @@ pstree() {
     _find_children "${1}" | awk 'NF || !blank++'
 }
 
-
 # --------------------------------------
 # mkextract
 # Extract files in their own directories
@@ -157,8 +155,7 @@ mkextract() {
         return 1
     fi
 
-    for file in "$@"
-    do
+    for file in "$@"; do
         local basename=$(basename "${file}")
         local ext_dir_name="${basename%%\.*}"
         local dirpath=$(realpath -- "$(dirname "${file}")")
@@ -175,4 +172,3 @@ mkextract() {
         fi
     done
 }
-
