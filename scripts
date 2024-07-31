@@ -15,13 +15,13 @@
 # append or prepend directory to path
 # -----------------------------------
 append_path() {
-    if [[ -d "${1}" && ! "${PATH}" == *"${1}"* ]]; then
+    if [[ -n "${1}" && -d "${1}" && ! "${PATH}" == *"${1}"* ]]; then
         export PATH="${PATH:+${PATH}:}${1}"
     fi
 }
 
 prepend_path() {
-    if [[ -d "${1}" && ! "${PATH}" == *"${1}"* ]]; then
+    if [[ -n "${1}" && -d "${1}" && ! "${PATH}" == *"${1}"* ]]; then
         export PATH="${1}${PATH:+:${PATH}}"
     fi
 }
