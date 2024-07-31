@@ -162,10 +162,12 @@ mkextract() {
         local filepath=$(realpath -- "${file}")
 
         if [ -f "${filepath}" ]; then
-            mkdir -p -- "${dirpath}/${ext_dir_name}/extracted"
+            mkdir -p -- "${dirpath}/${ext_dir_name}/extract"
             mv -- "${filepath}" "${dirpath}/${ext_dir_name}"
             cp -- "${dirpath}/${ext_dir_name}/${file}" "${dirpath}/${ext_dir_name}/extract/${file}"
+            pushd "${dirpath}/${ext_dir_name}/extract/" >/dev/null 2>&1 || exit 1
             _extract "${dirpath}/${ext_dir_name}/extract/${file}"
+            popd >/dev/null 2>&1 || exit 1
             rm -rf -- "${dirpath}/${ext_dir_name}/extract/${file}"
         else
             echo "'$1' is not a valid file"
