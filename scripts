@@ -190,3 +190,13 @@ mkextract() {
         fi
     done
 }
+
+# -----------
+# mwcurl
+# Midway Curl
+# -----------
+mwcurl() {
+    local mw_cookie_file="${HOME}/.midway/cookie"
+    curl "$@" --location --cookie "${mw_cookie_file}" --cookie-jar "${mw_cookie_file}"
+}
+
