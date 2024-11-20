@@ -266,7 +266,7 @@ mwcurl() {
 # -----------------
 lptar() {
     # Check if 'expect' is installed
-    if ! which expect; then
+    if ! which expect >/dev/null; then
         echo -e "${red}[ERROR] expect not found in PATH${end}"
         return 0
     fi
