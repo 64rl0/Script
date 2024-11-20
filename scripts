@@ -200,3 +200,30 @@ mwcurl() {
     curl "$@" --location --cookie "${mw_cookie_file}" --cookie-jar "${mw_cookie_file}"
 }
 
+# -----------------
+# lptar
+# LPT Auto Response
+# -----------------
+lptar() {
+    # Check if 'expect' is installed
+    if ! which expect; then
+        echo -e "[ERROR] expect not found in PATH"
+    fi
+
+    # Check an arg in passed in
+    if [[ -z "$*" ]]; then
+        lpt && exit 0
+    fi
+
+    # Execute the expect script logic
+    expect <<EOF
+eval spawn lpt "$@"
+while { true } {
+    expect {
+        "> (R, p, q)" { send "r\r"; exp_continue }
+        "> (y, N, q)" { send "y\r" ; exp_continue }
+        eof { exit }
+    }
+}
+EOF
+}
