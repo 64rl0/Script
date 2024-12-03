@@ -286,7 +286,7 @@ reginfo() {
     )
 
     # Declare an associative array
-    declare -A output
+    local -A output
 
     # Loop through the array
     for attribute in "${attributes[@]}"; do
