@@ -294,8 +294,6 @@ reginfo() {
         output["${attribute}"]="${response}"
     done
 
-    echo $output
-
     # Open JSON object
     json_output="{"
 
