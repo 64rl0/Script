@@ -243,46 +243,6 @@ reginfo() {
 
     attributes=(
         accessibility_attributes
-        airport_code
-        alternate_names
-        arn_partition
-        availability_zones
-        backbone
-        backend_vip_zone
-        billing_prefix
-        bvpc_location
-        cluster
-        cluster_long_name
-        code_name
-        custom_properties
-        customer_resources_domain_dualstack
-        description
-        domain
-        domain_dualstack
-        estimated_launch_date
-        external_name
-        geolocation_data
-        group
-        group_long_name
-        infra_frontend_vip_zone
-        localized_region_name
-        long_name
-        prod_host_types
-        public_dns_suffix
-        region_name
-        register_date
-        service_with_fallback
-        services
-        standard_frontend_vip_zone
-        status
-        status_dates
-        substrate_dns_suffix
-        tags
-        timezone_id
-        usage_type_prefix
-        vpc_dns_domain_suffix
-        website_domain
-        website_domain_dualstack
     )
 
     # Declare an associative array
@@ -304,7 +264,7 @@ reginfo() {
     json_output="${json_output%,}}"
 
     # Replace new lines with ', '
-    json_output=$(echo "${json_output}" | sed 's/\n/, /g')
+    json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
 
     echo "${json_output}"
 }
