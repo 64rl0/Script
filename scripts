@@ -239,7 +239,7 @@ reginfo() {
         return 0
     fi
 
-    region=$1
+    region="$1"
 
     attributes=(
         accessibility_attributes
