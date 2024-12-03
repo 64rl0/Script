@@ -239,9 +239,9 @@ reginfo() {
         return 0
     fi
 
-    region="$1"
+    local region="$1"
 
-    attributes=(
+    local attributes=(
         accessibility_attributes
         airport_code
         alternate_names
