@@ -298,8 +298,8 @@ reginfo() {
     local json_output="{"
 
     # Build JSON from the associative array
-    for key in "${!output[@]}"; do
-        json_output+="\"${key}\":\"${output[${key}]}\","
+    for key_unique in "${!output[@]}"; do
+        json_output+="\"${key_unique}\":\"${output[${key}]}\","
     done
 
     # Remove trailing comma
