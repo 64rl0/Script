@@ -290,7 +290,7 @@ reginfo() {
 
     # Loop through the array
     for attribute in "${attributes[@]}"; do
-        response=$(ripcli -r "${region}" -a "${attribute}" | sed 's/"/'\''/g')
+        response=$(ripcli -r "${region}" -a "${attribute}" | sed "s/\"/'/g")
         output["${attribute}"]="${response}"
     done
 
