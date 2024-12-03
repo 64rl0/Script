@@ -304,7 +304,7 @@ reginfo() {
     json_output="${json_output%,}}"
 
     # Replace new lines with ', '
-    json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
+    json_output=$(echo "${json_output}")
 
     echo "${json_output}"
 }
