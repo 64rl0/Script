@@ -239,7 +239,7 @@ reginfo() {
         return 0
     fi
 
-    local region="eu-west-1"
+    local region="$1"
 
     local attributes=(
         accessibility_attributes
