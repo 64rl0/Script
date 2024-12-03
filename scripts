@@ -235,7 +235,7 @@ EOF
 # -------------------------------
 reginfo() {
     if [[ -z "$1" ]]; then
-        echo region name must be passed as parameter
+        echo -e "\033[31m[ERROR] region name must be passed as parameter\033[0m"
         return 0
     fi
 
