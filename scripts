@@ -297,7 +297,7 @@ reginfo() {
     # Build JSON from the associative array
     json_output="{"
     for key in "${!output[@]}"; do
-        json_output+="\"${key}\":\"${output[$key]}\","
+        json_output+="\"${key}\":\"${output[${key}]}\","
     done
 
     # Remove trailing comma and close JSON object
