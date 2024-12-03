@@ -290,21 +290,21 @@ reginfo() {
 
     # Loop through the array
     for attribute in "${attributes[@]}"; do
-        response=$(ripcli -r "${region}" -a "${attribute}")
+        response=$(ripcli -r "${region}" -a "${attribute}" | sed 's/"/'\''/g')
         output["${attribute}"]="${response}"
     done
 
     # Build JSON from the associative array
     json_output="{"
     for key in "${!output[@]}"; do
-        json_output+="\"${key}\":\"${output[${key}]}\","
+        json_output+="\"$key\":\"${output[$key]}\","
     done
 
     # Remove trailing comma and close JSON object
     json_output="${json_output%,}}"
 
     # Replace new lines with ', '
-    json_output=$(echo "${json_output}")
+    json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
 
     echo "${json_output}"
 }
