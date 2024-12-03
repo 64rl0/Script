@@ -304,12 +304,14 @@ reginfo() {
         json_output+="\"${key}\":\"${output[${key}]}\","
     done
 
-    # Remove trailing comma and close JSON object
-    json_output="${json_output%,}"
-    json_output+="}"
+    # Remove trailing comma
+    json_output=$(echo "${json_output}" | sed 's/,$//')
 
     # Replace new lines with ', '
     json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
+
+    # Close JSON object
+    json_output+="}"
 
     echo "${json_output}"
 }
