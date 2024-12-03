@@ -290,7 +290,7 @@ reginfo() {
 
     # Loop through the array
     for attribute in "${attributes[@]}"; do
-        response=$(ripcli -r "${region}" -a "${attribute}" | sed "s/\"/'/g")
+        response=$(ripcli -r "${region}" -a "${attribute}" | sed 's/"/'\''/g')
         output["${attribute}"]="${response}"
     done
 
@@ -304,7 +304,7 @@ reginfo() {
     json_output="${json_output%,}}"
 
     # Replace new lines with ', '
-    json_output=$(echo "$json_output" | sed ':a;N;$!ba;s/\n/, /g')
+    json_output=$(echo "${json_output}" | sed 's/\n/, /g')
 
     echo "${json_output}"
 }
