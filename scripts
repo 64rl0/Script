@@ -295,7 +295,7 @@ reginfo() {
     done
 
     # Open JSON object
-    json_output="{"
+    local json_output="{"
 
     # Build JSON from the associative array
     for key in "${!output[@]}"; do
