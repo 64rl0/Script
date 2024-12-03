@@ -297,11 +297,12 @@ reginfo() {
     # Build JSON from the associative array
     json_output="{"
     for key in "${!output[@]}"; do
-        json_output+="\"$key\":\"${output[$key]}\","
+        json_output+="\"${key}\":\"${output[${key}]}\","
     done
 
     # Remove trailing comma and close JSON object
-    json_output="${json_output%,}}"
+    json_output="${json_output%,}"
+    json_output+="}"
 
     # Replace new lines with ', '
     json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
