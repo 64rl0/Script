@@ -299,7 +299,7 @@ reginfo() {
 
     # Build JSON from the associative array
     for key_unique in "${!output[@]}"; do
-        json_output+="\"${key_unique}\":\"${output[${key}]}\","
+        json_output+="\"${key_unique}\":\"${output[${key_unique}]}\","
     done
 
     # Remove trailing comma
