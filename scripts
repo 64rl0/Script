@@ -299,7 +299,6 @@ reginfo() {
 
     # Build JSON from the associative array
     for key in "${!output[@]}"; do
-        echo looping $key
         json_output+="\"${key}\":\"${output[${key}]}\","
     done
 
