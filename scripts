@@ -294,8 +294,10 @@ reginfo() {
         output["${attribute}"]="${response}"
     done
 
-    # Build JSON from the associative array
+    # Open JSON object
     json_output="{"
+
+    # Build JSON from the associative array
     for key in "${!output[@]}"; do
         json_output+="\"${key}\":\"${output[${key}]}\","
     done
