@@ -294,7 +294,7 @@ reginfo() {
         local response=$(ripcli -r "${region}" -a "${attribute}")
         # Replace double quotes to single quotes
         local json_response=$(echo "${json_response}" | sed 's/"/'\''/g')
-        json_output+="\"${key}\":\"${response}\","
+        json_output+="\"${attribute}\":\"${response}\","
     done
 
     # Remove trailing comma
