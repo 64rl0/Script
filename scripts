@@ -285,21 +285,16 @@ reginfo() {
         website_domain_dualstack
     )
 
-    # Declare an associative array
-    local -A output
-
-    # Loop through the array
-    for attribute in "${attributes[@]}"; do
-        response=$(ripcli -r "${region}" -a "${attribute}" | sed 's/"/'\''/g')
-        output["${attribute}"]="${response}"
-    done
-
     # Open JSON object
     local json_output="{"
 
-    # Build JSON from the associative array
-    for key in "${!output[@]}"; do
-        json_output+="\"${key}\":\"${output[${key}]}\","
+    # Loop through the array
+    for attribute in "${attributes[@]}"; do
+        # Retrieve the data
+        local response=$(ripcli -r "${region}" -a "${attribute}")
+        # Replace double quotes to single quotes
+        local json_response=$(echo "${json_response}" | sed 's/"/'\''/g')
+        json_output+="\"${key}\":\"${response}\","
     done
 
     # Remove trailing comma
@@ -313,3 +308,4 @@ reginfo() {
 
     echo "${json_output}"
 }
+
