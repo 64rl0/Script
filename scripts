@@ -236,6 +236,7 @@ EOF
 reginfo() {
     if [[ -z "$1" ]]; then
         echo -e "\033[31m[ERROR] region name must be passed as parameter\033[0m"
+        echo -e "\033[31mUsage: reginfo \"eu-west-1\"\033[0m"
         return 0
     fi
 
@@ -290,22 +291,21 @@ reginfo() {
 
     # Loop through the array
     for attribute in "${attributes[@]}"; do
-        # Retrieve the data
+        # Fetch the data
         local response=$(ripcli -r "${region}" -a "${attribute}")
-        # Replace double quotes to single quotes
-        local json_response=$(echo "${response}" | sed 's/"/'\''/g')
+        # Replace '"' with ''' and '\n' with ', '
+        local json_response=$(echo "${response}" | sed 's/"/'\''/g' | sed ':a;N;$!ba;s/\n/, /g')
+        # Construct JSON body
         json_output+="\"${attribute}\":\"${json_response}\","
     done
 
     # Remove trailing comma
     json_output=$(echo "${json_output}" | sed 's/,$//')
 
-    # Replace new lines with ', '
-    json_output=$(echo "${json_output}" | sed ':a;N;$!ba;s/\n/, /g')
-
     # Close JSON object
     json_output+="}"
-
+    
+    # Return JSON object
     echo "${json_output}"
 }
 
